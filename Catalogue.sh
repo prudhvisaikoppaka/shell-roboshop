@@ -70,4 +70,4 @@ dnf install mongodb-mongosh -y &>>$LOG_FILE
 VALIDATE $? "Installing MongoDB client"
 
 mongosh --host mongodb.prudhvisai.space</app/db/master-data.js &>>$LOG_FILE
-VALIDATE $? "Loading the data into MongoDB"
+VALIDATE $? "Loading the data into 
