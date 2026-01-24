@@ -77,7 +77,7 @@ dnf install mongodb-mongosh -y &>>$LOG_FILE
 VALIDATE $? "Installing MongoDB client"
 
 STATUS=$(mongosh --host mongodb.prudhvisai.space --eval 'db.getMongo().getDBNames().indexOf("catalogue")')
-if [ $STATUS lt 0 ]
+if [ $STATUS -lt 0 ]
 then
    mongosh --host mongodb.prudhvisai.space</app/db/master-data.js &>>$LOG_FILE
    VALIDATE $? "Loading the data into the MongoDB"
