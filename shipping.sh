@@ -22,6 +22,8 @@ else
    echo -e "$Y You are running this script with root access $N" | tee -a $LOG_FILE
 fi
 
+echo "Please enter root password to setup"
+read -s MYSQL_ROOT_PASSWORD
 VALIDATE(){
    if [ $1 -eq 0 ]
     then
@@ -76,9 +78,9 @@ VALIDATE $? "Starting shipping"
 dnf install mysql -y &>>$LOG_FILE
 VALIDATE $? "Install Client MySQL"
 
-mysql -h mysql.prudhvisai.space -uroot -pRoboShop@1 < /app/db/schema.sql &>>$LOG_FILE 
-mysql -h mysql.prudhvisai.space -uroot -pRoboShop@1 < /app/db/app-user.sql &>>$LOG_FILE
-mysql -h mysql.prudhvisai.space -uroot -pRoboShop@1 < /app/db/master-data.sql &>>$LOG_FILE
+mysql -h mysql.prudhvisai.space -uroot -p$MYSQL_ROOT_PASSWORD < /app/db/schema.sql &>>$LOG_FILE 
+mysql -h mysql.prudhvisai.space -uroot -p$MYSQL_ROOT_PASSWORD < /app/db/app-user.sql &>>$LOG_FILE
+mysql -h mysql.prudhvisai.space -uroot -p$MYSQL_ROOT_PASSWORD < /app/db/master-data.sql &>>$LOG_FILE
 VALIDATE $? "Loading data into MySQL"
 
 systemctl restart shipping &>>$LOG_FILE
