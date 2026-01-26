@@ -21,7 +21,7 @@ else
    echo -e "$Y You are running this script with root access $N" | tee -a $LOG_FILE
 fi
 
-VALIDATE if (){
+VALIDATE(){
    if [ $1 -eq 0 ]
     then
       echo -e "$2 is ... $G Success $N" | tee -a $LOG_FILE
