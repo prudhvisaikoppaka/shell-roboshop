@@ -36,7 +36,6 @@ VALIDATE(){
    fi       
 }
 
-
 dnf install mysql-server -y &>>$LOG_FILE
 VALIDATE $? "Installing MySQL"
 
