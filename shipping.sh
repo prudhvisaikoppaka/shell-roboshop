@@ -44,7 +44,7 @@ else
    echo -e "System user roboshop already created ... $Y Skipping $N"
 fi
 
-mkdir /app
+mkdir -p /app
 VALIDATE $? "Creating app directory"
 
 curl -L -o /tmp/shipping.zip https://roboshop-artifacts.s3.amazonaws.com/shipping-v3.zip &>>$LOG_FILE
