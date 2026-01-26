@@ -32,38 +32,44 @@ VALIDATE(){
    fi    
 }
 
-dnf install maven -y
+dnf install maven -y &>>$LOG_FILE
 VALIDATE $? "Installing maven server"
 
-useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop
-VALIDATE $? "Creating roboshop system user"
+id roboshop
+if [$? -ne 0]
+then   
+   useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop &>>$LOG_FILE
+   VALIDATE $? "Creating roboshop system user"
+else
+   echo -e "System user roboshop already created ... $Y Skipping $N"
+fi
 
 mkdir /app
 VALIDATE $? "Creating app directory"
 
-curl -L -o /tmp/shipping.zip https://roboshop-artifacts.s3.amazonaws.com/shipping-v3.zip 
+curl -L -o /tmp/shipping.zip https://roboshop-artifacts.s3.amazonaws.com/shipping-v3.zip &>>$LOG_FILE
 VALIDATE $? "Downloading shipping user"
 
 cd /app 
-unzip /tmp/shipping.zip
+unzip /tmp/shipping.zip &>>$LOG_FILE
 VALIDATE $? "Unziping user"
 
-mvn clean package
+mvn clean package &>>$LOG_FILE
 VALIDATE $? "Installing the clean package"
 
-mv target/shipping-1.0.jar shipping.jar
+mv target/shipping-1.0.jar shipping.jar &>>$LOG_FILE
 VALIDATE $? "Building the application"
 
 cp $SCRIPT_DIR/shipping.service /etc/systemd/system/shipping.service
 VALIDATE $? "Copying the shipping.service"
 
-systemctl daemon-reload
+systemctl daemon-reload &>>$LOG_FILE
 VALIDATE $? "System reload"
 
-systemctl enable shipping
+systemctl enable shipping &>>$LOG_FILE
 VALIDATE $? "Enabling shipping"
 
-systemctl start shipping
+systemctl start shipping &>>$LOG_FILE
 VALIDATE $? "Starting shipping"
 
 END_TIME=$(date +%s)
