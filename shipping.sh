@@ -78,7 +78,7 @@ VALIDATE $? "Starting shipping"
 dnf install mysql -y &>>$LOG_FILE
 VALIDATE $? "Install Client MySQL"
 
-mysql -h mysql.prudhvisai.space -u root -p$MYSQL_ROOT_PASSWORD -e 'use cities'
+mysql -h mysql.prudhvisai.space -u root -p$MYSQL_ROOT_PASSWORD -e 'use cities' &>>$LOG_FILE
 if [ $? -ne 0 ]
 then
    mysql -h mysql.prudhvisai.space -uroot -p$MYSQL_ROOT_PASSWORD < /app/db/schema.sql &>>$LOG_FILE 
