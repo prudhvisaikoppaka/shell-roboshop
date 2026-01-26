@@ -5,7 +5,7 @@ Description=Shipping Service
 User=roboshop
 // highlight-start
 Environment=CART_ENDPOINT=cart.prudhvisai.space:8080
-Environment=DB_HOST=mysql.prudhvi.space
+Environment=DB_HOST=mysql.prudhvisai.space
 // highlight-end
 ExecStart=/bin/java -jar /app/shipping.jar
 SyslogIdentifier=shipping
