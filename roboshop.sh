@@ -1,9 +1,9 @@
 #!/bin/bash
 
 AMI_ID="ami-0220d79f3f480ecf5"
-SG_ID="sg-0ab70a84fcd87cc0d"
+SG_ID="sg-01431a141b5a82d24"
 INSTANCES=("mongodb" "redis" "mysql" "rabbitmq" "catalogue" "user" "cart" "shipping" "payment" "dispatch" "frontend")
-ZONE_ID="Z01270651RFKJINNVPOEI"
+ZONE_ID="Z08496491D9BJEMR7DC94"
 DOMAIN_NAME="prudhvisai.space"
 
 #for instance in ${INSTANCES[@]} for all instances creation at once
